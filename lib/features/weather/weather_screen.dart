@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'weather_service.dart';
+import '../auth/auth_controller.dart';
+import '../auth/login_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
@@ -14,6 +17,15 @@ class _WeatherScreenState extends State<WeatherScreen> {
   Weather? weather;
   String? error;
   bool isLoading = false;
+
+  void executeLogout() {
+    final container = ProviderScope.containerOf(context, listen: false);
+    container.read(authControllerProvider.notifier).logout();
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (_) => const LoginScreen()),
+      (route) => false,
+    );
+  }
 
   @override
   void initState() {
@@ -198,14 +210,36 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   ],
                                 ),
                                 const SizedBox(height: 24),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                                    padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 32),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                                  ),
-                                  onPressed: fetchWeather,
-                                  child: const Text('Refresh'),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 32),
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                                      ),
+                                      onPressed: fetchWeather,
+                                      child: const Text('Refresh'),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 32),
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                                      ),
+                                      onPressed: executeLogout,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: const [
+                                          Icon(Icons.logout),
+                                          SizedBox(width: 8),
+                                          Text('Logout'),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
