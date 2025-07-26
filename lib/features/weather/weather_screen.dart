@@ -113,7 +113,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                     ),
                                   ],
                                 ),
-                                // Descrição logo abaixo do ícone
                                 const SizedBox(height: 12),
                                 Center(
                                   child: Text(
