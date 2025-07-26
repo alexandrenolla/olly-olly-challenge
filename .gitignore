@@ -1,0 +1,57 @@
+# Miscellaneous
+
+\*.class
+\*.log
+\*.pyc
+\*.swp
+.DS\_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate\_working\_dir/
+
+# IntelliJ related
+
+\*.iml
+\*.ipr
+\*.iws
+.idea/
+
+# VS Code settings (uncomment if needed)
+
+# .vscode/
+
+# Flutter/Dart/Pub related
+
+\*\*/doc/api/
+\*\*/ios/Flutter/.last\_build\_id
+.dart\_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+
+# Generated metadata
+
+.metadata
+
+# Symbolication related
+
+app.\*.symbols
+
+# Obfuscation related
+
+app.\*.map.json
+
+# Android Studio build artifacts
+
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Environment variables
+
+.env
